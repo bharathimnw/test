@@ -1,0 +1,224 @@
+<html>
+<head>
+<script src="web3.min.js"></script>
+<body style="background-color:lightblue"><center>
+
+<table border=1>Trasfer:<br><br>
+<tr><td>address:</td></tr><tr><td><input type="text" id="add" value=""></td></tr>
+<tr><td>amount:</td></tr><tr><td><input type="Number" id="amount" value=""></td></tr>
+<tr><td><input type="button" onclick="transfer()" value="click"></td></tr>
+ </table><br><br>
+
+<table border=1>
+Mint:<br><br>
+<tr><td>amount:</td></tr><tr><td><input type="text" id="val" value=""></td></tr>
+<tr><td><input type="button" onclick="mint()" value="click"></td></tr>
+</table><br><br>
+
+<table border=1>
+transfrom:<br><br>
+
+<tr><td>from:</td></tr><tr><td><input type="text" id="add1" value=""></td></tr>
+<tr><td>to:</td></tr><tr><td><input type="text" id="add2" value=""></td></tr>
+<tr><td>amount:</td></tr><tr><td><input type="Number" id="val2" value=""></td></tr>
+<tr><td><input type="button" onclick="transfrom()" value="click"></td></tr>
+</table><br><br>
+<script>
+ web3.eth.defaultAccount = web3.eth.accounts[0];
+        var imngs = web3.eth.contract([
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "totalsupply",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "decimal",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "balance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "Symbol",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "mint",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transfrom",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	}
+]);
+var imn = imngs.at('0x67837d713e2d9cfe88c49021b05b212a359040d2');
+         if(web3.isConnected()) {
+  
+        console.log("Ok");
+        
+      } else {
+        console.log("no");
+      }
+      web3.version.getNetwork((err, netId) => {
+            switch (netId) {
+              case "1":
+                console.log('This is mainnet')
+                break
+              case "2":
+                console.log('This is the deprecated Morden test network.')
+                break
+              case "3":
+                console.log('This is the ropsten test network.')
+                break
+              case "4":
+                console.log('This is the Rinkeby test network.')
+                break
+              case "42":
+                console.log('This is the Kovan test network.')
+                break
+              default:
+                console.log('This is an unknown network.')
+            }
+        });
+function transfer(){
+alert("hi");
+var a=document.getElementById("add").value;
+var b=document.getElementById("amount").value;
+imn.transfer(a,b,function(error,result){
+	console.log(result);
+});
+}
+function mint(){
+alert("hi");
+var a=document.getElementById("val").value;
+imn.mint(a,function(error,result){
+	console.log(result);
+});
+}
+
+function transfrom(){
+alert("hi");
+var a=document.getElementById("add1").value;
+var b=document.getElementById("add2").value;
+var c=document.getElementById("val2").value;
+imn.transfrom(a,b,c,function(error,result){
+	console.log(result);
+});
+}
+
+</script>
+</body>
+</center>
+</head>
+</html>
